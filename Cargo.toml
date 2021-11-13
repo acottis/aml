@@ -1,0 +1,11 @@
+[package]
+name = "aml"
+version = "0.1.0"
+edition = "2021"
+description = "A parser for AML (Adam Markup Language), motivation behind this is to create \"secret\" variable files that I can add to my gitignore and parse as needed for unit tests"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+
+[dependencies]
