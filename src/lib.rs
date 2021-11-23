@@ -56,16 +56,17 @@
 use std::fs::{File, read_to_string};
 use std::collections::HashMap;
 use std::io::prelude::Write;
+use std::path::Path;
 
 static DELIMITER: &str = "===";
 static CRLF: &str = "\r\n";
 
 /// Takes in a string of the filename you want to load into a dictionary and returns the dictionary.
 /// Example at [crate] index
-pub fn load(filename: String) -> HashMap<String, String>{
+pub fn load(filename: impl AsRef<Path>) -> HashMap<String, String>{
 
     let mut dict: HashMap<String, String> = HashMap::new();
-    let file = read_to_string(filename).expect("Could not open file");
+    let file = read_to_string(&filename).expect("Could not open file");
     
     let mut lines = file.split("\r\n").filter(|&x| x != "");
 
@@ -81,11 +82,11 @@ pub fn load(filename: String) -> HashMap<String, String>{
 
 /// Takes in a string of the filename you want to save to and the dictionary you want to write to it.
 /// Example at [crate] index
-pub fn save(filename: String, dict: HashMap<String, String>) -> Result<(), std::io::Error> {
+pub fn save(filename: impl AsRef<Path>, dict: HashMap<String, String>) -> Result<(), std::io::Error> {
 
-    let file = File::open(filename.to_owned()).unwrap_or_else(|_| {
+    let file = File::open(&filename).unwrap_or_else(|_|{
         //println!("Creating {} as it did not exist", filename);
-        File::create(filename.to_owned()).unwrap()
+        File::create(&filename).unwrap()
     });
 
     let mut writer = std::io::BufWriter::new(file);
