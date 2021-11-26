@@ -50,4 +50,4 @@ key3===Data with spaces
 
 # Limitations
 - Value or key cannot contain three consecutive equal signs `===`
-- Key cannot end with 2 consecutive equal signs `==`
+- Key cannot end equal signs `=`
